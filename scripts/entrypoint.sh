@@ -5,13 +5,9 @@ if [[ -z "$APP_NAME" ]]; then
     exit 1
 fi
 
-if [[ -z "$NEW_RELIC_LICENSE_KEY" ]]; then
-    echo "NEW_RELIC_LICENSE_KEY must be present" 1>&2
-    exit 1
-fi
-
 NEW_RELIC_ENABLED=false
 NEW_RELIC_ENV=development
+
 if [[ $SPRING_PROFILES_ACTIVE == *"dev-env"* ]]; then
     NEW_RELIC_ENABLED=true
     NEW_RELIC_ENV=staging
@@ -19,6 +15,11 @@ fi
 if [[ $SPRING_PROFILES_ACTIVE == *"prod-env"* ]]; then
     NEW_RELIC_ENABLED=true
     NEW_RELIC_ENV=production
+fi
+
+if [[ -z "$NEW_RELIC_LICENSE_KEY" ]]; then
+    NEW_RELIC_ENABLED=false
+    NEW_RELIC_LICENSE_KEY=__not_set__
 fi
 
 sed -i 's/"<%= license_key %>"/'$NEW_RELIC_LICENSE_KEY'/' ./newrelic/newrelic.yml
