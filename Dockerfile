@@ -8,6 +8,7 @@ RUN \
   && rm /tmp/newrelic.zip
 
 COPY ./scripts .
+COPY ./newrelic.yml ./newrelic/newrelic.yml
 
 RUN ["chmod", "+x", "./entrypoint.sh"]
 
