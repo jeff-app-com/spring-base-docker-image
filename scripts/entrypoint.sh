@@ -22,7 +22,7 @@ if [[ -z "$NEW_RELIC_LICENSE_KEY" ]]; then
     NEW_RELIC_LICENSE_KEY=__not_set__
 fi
 
-echo "NEW_RELIC_ENABLED=$NEW_RELIC_ENABLED and NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY:0:3}***"
+echo "NEW_RELIC_ENABLED=$NEW_RELIC_ENABLED; NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY:0:3}***; NEW_RELIC_ENV=${NEW_RELIC_ENV}"
 
 sed -i 's/"<%= license_key %>"/'$NEW_RELIC_LICENSE_KEY'/' ./newrelic/newrelic.yml
 sed -i 's/"<%= common_agent_enabled %>"/'$NEW_RELIC_ENABLED'/' ./newrelic/newrelic.yml
