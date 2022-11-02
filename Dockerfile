@@ -11,5 +11,6 @@ COPY ./scripts .
 COPY ./newrelic.yml ./newrelic/newrelic.yml
 
 RUN ["chmod", "+x", "./entrypoint.sh"]
+ENV JAVA_OPTS
 
 ENTRYPOINT ["./entrypoint.sh"]
