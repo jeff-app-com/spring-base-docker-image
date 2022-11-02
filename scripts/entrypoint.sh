@@ -37,4 +37,4 @@ if [ ! -f "$JAR_FILE" ]; then
     exit 1
 fi
 
-java -javaagent:./newrelic/newrelic.jar -jar app.jar
+java ${JAVA_OPTS} -javaagent:./newrelic/newrelic.jar -jar app.jar
