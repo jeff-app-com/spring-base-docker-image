@@ -9,6 +9,8 @@ on:
 env:
   OWNER: jeff-app-com
   IMAGE_NAME: base-spring-docker-image
+  IMAGE_NAME_11: base-spring-docker-image-11-slim
+  IMAGE_NAME_17: base-spring-docker-image-17-slim
 
 jobs:
   build-and-push:
@@ -32,12 +34,26 @@ jobs:
           registry: ghcr.io
           username: jeff-machine-user
           password: ${{ secrets.CR_PAT }}
-      - name: Build and push
+      - name: Build and push v11
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ghcr.io/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
+          build-args: |
+            JDK_TAG=11-slim
+          tags: |
+            ghcr.io/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
+            ghcr.io/${{ env.OWNER }}/${{ env.IMAGE_NAME_11 }}:latest
+          cache-from: type=local,src=/tmp/.buildx-cache
+          cache-to: type=local,dest=/tmp/.buildx-cache-new
+      - name: Build and push v17
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: true
+          build-args: |
+            JDK_TAG=17-slim
+          tags: ghcr.io/${{ env.OWNER }}/${{ env.IMAGE_NAME_17 }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
       # This ugly bit is necessary if you don't want your cache to grow forever till it hits GitHub's limit of 5GB.
