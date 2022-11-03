@@ -1,6 +1,11 @@
-FROM openjdk:11-slim
+ARG JDK_TAG=11-slim
 
-RUN apt-get update && apt-get install -y curl unzip
+FROM openjdk:${JDK_TAG}
+
+RUN apt-get update \
+  && apt-get install -y curl unzip \
+  && rm -rf /var/lib/apt/lists/*
+
 
 RUN \
   curl "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip" -o /tmp/newrelic.zip \
@@ -11,6 +16,6 @@ COPY ./scripts .
 COPY ./newrelic.yml ./newrelic/newrelic.yml
 
 RUN ["chmod", "+x", "./entrypoint.sh"]
-ENV JAVA_OPTS=
 
+ENV JAVA_OPTS=
 ENTRYPOINT ["./entrypoint.sh"]
