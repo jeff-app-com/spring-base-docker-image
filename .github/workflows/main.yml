@@ -40,7 +40,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            JDK_TAG=11-slim
+            JDK_TAG=11-jdk
           tags: |
             ghcr.io/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
             ghcr.io/${{ env.OWNER }}/${{ env.IMAGE_NAME_11 }}:latest
@@ -52,7 +52,7 @@ jobs:
           context: .
           push: true
           build-args: |
-            JDK_TAG=17-slim
+            JDK_TAG=17-jdk
           tags: ghcr.io/${{ env.OWNER }}/${{ env.IMAGE_NAME_17 }}:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new
