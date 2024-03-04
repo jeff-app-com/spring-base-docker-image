@@ -1,6 +1,6 @@
-ARG JDK_TAG=11-slim
+ARG JDK_TAG=17-jdk
 
-FROM openjdk:${JDK_TAG}
+FROM eclipse-temurin:${JDK_TAG}
 
 RUN apt-get update \
   && apt-get install -y curl unzip \
