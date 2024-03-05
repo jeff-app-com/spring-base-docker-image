@@ -1,4 +1,4 @@
-ARG JDK_TAG=17-jdk
+ARG JDK_TAG=17.0.10_7-jdk
 
 FROM eclipse-temurin:${JDK_TAG}
 
