@@ -8,7 +8,7 @@ RUN apt-get update \
 
 
 RUN \
-  curl "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/current/newrelic-java.zip" -o /tmp/newrelic.zip \
+  curl "https://download.newrelic.com/newrelic/java-agent/newrelic-agent/8.9.1/newrelic-java.zip" -o /tmp/newrelic.zip \
   && unzip /tmp/newrelic.zip -d ./ \
   && rm /tmp/newrelic.zip
 
